@@ -1,0 +1,10 @@
+{"placeholder": "text_a"} it is so {"mask"} .
+{"placeholder": "text_a"} they are so {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it is so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it's {"mask"} and it's not that bad.
+{"placeholder": "text_a"} it's so {"mask"} and so personal.
+{"placeholder": "text_a"} it's so {"mask"} and so useless.
+{"placeholder": "text_a"} it is so {"mask"} and so strange.
+{"placeholder": "text_a"} it's so {"mask"} and so untouchable.

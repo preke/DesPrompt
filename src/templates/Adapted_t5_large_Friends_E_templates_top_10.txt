@@ -1,0 +1,9 @@
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} she is so {"mask"} .
+{"placeholder": "text_a"} she's so {"mask"} .
+{"placeholder": "text_a"} she's really {"mask"} .
+{"placeholder": "text_a"} it's really {"mask"} .
+{"placeholder": "text_a"} it's kind of {"mask"} .
+{"placeholder": "text_a"} that's the problem with {"mask"} people.
+{"placeholder": "text_a"} but it's kind of {"mask"} .
+{"placeholder": "text_a"} that's the problem with being {"mask"} .

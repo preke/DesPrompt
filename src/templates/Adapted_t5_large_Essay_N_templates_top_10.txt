@@ -1,0 +1,10 @@
+{"placeholder": "text_a"} it is so {"mask"} .
+{"placeholder": "text_a"} they are so {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} it is so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it's so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it's {"mask"} and it's not that bad.
+{"placeholder": "text_a"} it's {"mask"} and it's not that good.
+{"placeholder": "text_a"} it is so strange how people can {"mask"} their own lives.
+{"placeholder": "text_a"} it's so {"mask"} and it's not even my fault.
+{"placeholder": "text_a"} it is so strange how people can {"mask"} their own lives without knowing the other person.

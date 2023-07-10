@@ -1,0 +1,9 @@
+{"placeholder": "text_a"}  {"mask"} assholes.
+{"placeholder": "text_a"} and {"mask"} .
+{"placeholder": "text_a"}  {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} she is so {"mask"} .
+{"placeholder": "text_a"} she's so {"mask"} .
+{"placeholder": "text_a"} it's really {"mask"} .
+{"placeholder": "text_a"}  {"mask"} asshole.
+{"placeholder": "text_a"} it's just that it really is hard to find someone who is {"mask"} and.

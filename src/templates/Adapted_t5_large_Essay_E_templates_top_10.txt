@@ -1,0 +1,7 @@
+{"placeholder": "text_a"} they are so {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} it's {"mask"} .
+{"placeholder": "text_a"} it's kind of {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it's {"mask"} and it's not that bad.
+{"placeholder": "text_a"} it's kind of funny to think that it's been {"mask"} for so.

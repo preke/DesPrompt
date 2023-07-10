@@ -1,0 +1,10 @@
+{"placeholder": "text_a"} it is so {"mask"} .
+{"placeholder": "text_a"} it's {"mask"} .
+{"placeholder": "text_a"} is it {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} and it's always {"mask"} .
+{"placeholder": "text_a"} and it's not even {"mask"} .
+{"placeholder": "text_a"} and it's not that {"mask"} .
+{"placeholder": "text_a"} that is the only thing that makes me feel {"mask"} .
+{"placeholder": "text_a"} that is the only thing that makes me {"mask"} .
+{"placeholder": "text_a"} that is the only thing that makes me {"mask"} is the fact that she is the.

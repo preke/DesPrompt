@@ -1,0 +1,10 @@
+{"placeholder": "text_a"} it's {"mask"} .
+{"placeholder": "text_a"} it is so {"mask"} .
+{"placeholder": "text_a"} is it {"mask"} .
+{"placeholder": "text_a"} and it's {"mask"} .
+{"placeholder": "text_a"} and it's always {"mask"} .
+{"placeholder": "text_a"} but it's still {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} it's {"mask"} and it's not the best way to be.
+{"placeholder": "text_a"} it's {"mask"} and it's not that bad.
+{"placeholder": "text_a"} it's {"mask"} and it's not the same as the others.

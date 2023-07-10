@@ -1,0 +1,10 @@
+{"placeholder": "text_a"} it is so {"mask"} .
+{"placeholder": "text_a"} it's {"mask"} .
+{"placeholder": "text_a"} they are so {"mask"} .
+{"placeholder": "text_a"} it's so {"mask"} .
+{"placeholder": "text_a"} the {"mask"} one.
+{"placeholder": "text_a"} it's {"mask"} and it's not that bad.
+{"placeholder": "text_a"} it's so {"mask"} and so uncaring.
+{"placeholder": "text_a"} it's {"mask"} and it's not the best way to be.
+{"placeholder": "text_a"} it's {"mask"} and it's not that good.
+{"placeholder": "text_a"} it's {"mask"} and it's not even my favorite.
