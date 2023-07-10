@@ -6,6 +6,9 @@ This reposity contains the source code and data for the paper *DesPrompt: Person
 
 <img src='workflow.png' width=60% />
 
+
+#### Source Code:
+
 Following the workflow above, we generate the prior verbalizers (words and their corresponding weights) by `src/label_words/Prior Verbalizer Generation.ipynb`;
 
 Then, we Pre-finetuning the T5 models by `src/Cohesive Pre-finetuning.ipynb`;
@@ -16,6 +19,13 @@ Then, in Coherent Prompt Generation, we generate the templates through `src/Cohe
 Then, we generate the Posterior Verbaliser through `src/Posterior Verbalizer Generation.ipynb`;
 
 Finally, we conduct the Prompt-based fine-tuning through `src/main.py`
+
+
+#### Single Sample API:
+
+We also provide a code to inference the personality of an input single sentence with our method: `/src/single_sample_api.py`.
+
+You can modify the input sentence at `line 92`.
 
 
 #### Required packages:
