@@ -35,8 +35,8 @@ from transformers.utils.dummy_pt_objects import PreTrainedModel
 parser = argparse.ArgumentParser(description='')
 args   = parser.parse_args()
 import os
-args.device         = torch.device('cuda:0') 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+args.device         = torch.device('cuda:1') 
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 args.adam_epsilon   = 1e-8
 args.num_of_epoches = 3
 args.num_class      = 2
