@@ -14,8 +14,7 @@ from openprompt.data_utils import InputExample
 from openprompt.data_utils.data_sampler import FewShotSampler
 from openprompt import PromptForClassification
 
-from verbalizer import MyVerbalizer#, ManualVerbalizer
-
+from verbalizer import MyVerbalizer
 
 import json
 from transformers.tokenization_utils import PreTrainedTokenizer
@@ -43,7 +42,7 @@ args.num_of_epoches = 3
 args.num_class      = 2
 args.drop_out       = 0.1
 args.test_size      = 0.1
-args.method         = 'Ours' #'PET_wiki', 'KPT_augmented'
+args.method         = 'DesPrompt' #'PET_wiki', 'KPT_augmented'
 args.learning_rate  = 2e-5
 # knowledgeable prompt tuning:
 
@@ -55,12 +54,12 @@ args.max_token_split = -1
 
 # datasets      = ['MyPersonality', 'Pan', 'mbti', 'Friends_Persona', 'Essay']
 datasets      = ['Friends_Persona']#[ 'Essay', 'MyPersonality', 'Pan'] # 'Friends_Persona',
-seeds         = [321, 42, 1024, 0, 1, 13, 41, 123, 456, 999]
-few_shot_list = [0]#, 1, 8, 16, 32, -1]
+seeds         = [0]#[321, 42, 1024, 0, 1, 13, 41, 123, 456, 999]
+few_shot_list = [10]#, 1, 8, 16, 32, -1]
 
 args.BASE = 'RoBERTa-large'
 args.templates = 'Adapted_t5_large_Friends_' #'t5-large_Friends_' 
-args.verbalizer = '' # 'posterior_'
+args.verbalizer = 'posterior_'
 
 
 MAX_LEN_dict = {
@@ -118,11 +117,11 @@ def get_test_results(test_dataloader, logits):
             inputs = inputs.cuda()
         labels = inputs['label']
         labels_list = np.append(labels.cpu().tolist(), labels_list)
+
     print(pred_list)
     print('****************')
     print(labels_list)
-    import time
-    time.sleep(100)
+
     return f1_score(labels_list, pred_list)
 
 
@@ -137,14 +136,14 @@ def test(test_dataloader, prompt_model):
         logits = prompt_model(inputs)
         overall_logits.append(logits.detach())
     overall_logits = torch.cat(overall_logits)
-    # print('='*20)
-    # print(overall_logits.shape)
+    print('='*20)
+    print(overall_logits.shape)
     return overall_logits
 
 
 def fit(model, train_dataloader, val_dataloader, loss_func, optimizer):
     best_score = 0.0
-    for epoch in range(3):
+    for epoch in range(args.num_of_epoches):
         train_epoch(model, train_dataloader, loss_func, optimizer)
         score = evaluate(model, val_dataloader)
         if score > best_score:
@@ -212,7 +211,7 @@ for data in datasets:
         args.shots = shots
         
         # ******** result name ********
-        args.result_name  = './result/' + args.method + '_'+args.BASE + '_' + args.data + '_shots_' + str(args.shots) + \
+        args.result_name  = './results/' + args.method + '_'+args.BASE + '_' + args.data + '_shots_' + str(args.shots) + \
                             '_Verbalizer_'+args.verbalizer+'_template_'+args.templates+'.txt'
         with open(args.result_name, 'w') as f:
             test_f1_total = []
@@ -278,13 +277,13 @@ for data in datasets:
 
                     # ***** construct verbalizer ***** 
 
-                    with open('label_words/'+args.verbalizer+args.personality+'_words.txt', 'r') as f_verbalizer:
+                    with open('label_words/'+args.verbalizer+args.personality+'_label_words.txt', 'r') as f_verbalizer:
                             pos = [i.strip() for i in f_verbalizer.readline().split(',')][:100]
-                            neg = [i.strip() for i in f_verbalizer.readline().split(',')][:80]
+                            neg = [i.strip() for i in f_verbalizer.readline().split(',')][:100]
 
-                    with open('label_words/'+args.verbalizer+args.personality+'_weights.txt', 'r') as f_verbalizer:
+                    with open('label_words/'+args.verbalizer+args.personality+'_label_weights.txt', 'r') as f_verbalizer:
                             pos_weights = eval(f_verbalizer.readline())[:100]
-                            neg_weights = eval(f_verbalizer.readline())[:80]
+                            neg_weights = eval(f_verbalizer.readline())[:100]
 
 
                     diff_len = len(neg_weights) - len(pos_weights)
@@ -304,7 +303,7 @@ for data in datasets:
                     
                     logits_all_templates = []
 
-                    plm, tokenizer, model_config, WrapperClass = load_plm("roberta", "roberta-large")
+                    plm, tokenizer, model_config, WrapperClass = load_plm("roberta", "roberta-base")
                     wrapped_tokenizer = WrapperClass(max_seq_length=MAX_LEN, tokenizer=tokenizer,truncate_method="head")
 
                     
