@@ -14,7 +14,7 @@ from openprompt.data_utils import InputExample
 from openprompt.data_utils.data_sampler import FewShotSampler
 from openprompt import PromptForClassification
 
-from verbalizer import MyVerbalizer
+from verbalizer import ManualVerbalizer, KnowledgeableVerbalizer
 
 import json
 from transformers.tokenization_utils import PreTrainedTokenizer
@@ -54,20 +54,18 @@ args.max_token_split = -1
 
 # datasets      = ['MyPersonality', 'Pan', 'mbti', 'Friends_Persona', 'Essay']
 datasets      = ['Friends_Persona']#[ 'Essay', 'MyPersonality', 'Pan'] # 'Friends_Persona',
-seeds         = [0]#[321, 42, 1024, 0, 1, 13, 41, 123, 456, 999]
-few_shot_list = [10]#, 1, 8, 16, 32, -1]
+seeds         = [42]#[321, 42, 1024, 0, 1, 13, 41, 123, 456, 999]
+few_shot_list = [1]#, 1, 8, 16, 32, -1]
 
 args.BASE = 'RoBERTa-large'
-args.templates = 'Adapted_t5_large_Friends_' #'t5-large_Friends_' 
+args.templates = 'Adapted_t5_large_Friends_'
 args.verbalizer = 'posterior_'
-
 
 MAX_LEN_dict = {
     'Friends_Persona': 128,
     'Essay'          : 512,
     'MyPersonality'  : 512,
     'Pan'            : 512,
-    # 'mbti'           : 512
 }
 
 Personalities_dict = {
@@ -75,24 +73,18 @@ Personalities_dict = {
     'Essay'          : ['A', 'C', 'E', 'O', 'N'],
     'MyPersonality'  : ['A', 'C', 'E', 'O', 'N'],
     'Pan'            : ['A', 'C', 'E', 'O', 'N'],
-    # 'mbti'           : ['I', 'N', 'T', 'J']
 }
-
 
 DATA_PATH_dict = {
     'Friends_Persona': '../data/FriendsPersona/Friends_',
     'Essay'          : '../data/Essay/Essay_',
     'MyPersonality'  : '../data/myPersonality/MyPersonality_',
     'Pan'            : '../data/pan2015/Pan_',
-    # 'mbti'           : '../data/Kaggle_mbti/mbti_'
-
 }
- 
-
 
 use_cuda = True
-# ==============
 
+# ==============
 def evaluation(validation_dataloader, prompt_model):
     prompt_model.eval()
     labels_list = np.array([])
@@ -106,7 +98,6 @@ def evaluation(validation_dataloader, prompt_model):
         labels_list = np.append(labels.cpu().tolist(), labels_list)
         pred_list = np.append(preds, pred_list)
     return f1_score(labels_list, pred_list)
-
 
 def get_test_results(test_dataloader, logits):
     prompt_model.eval()
@@ -276,14 +267,14 @@ for data in datasets:
 
 
                     # ***** construct verbalizer ***** 
+                    n = 200
+                    with open('label_words/'+args.verbalizer+args.personality+'_words.txt', 'r') as f_verbalizer:
+                            pos = [i.strip() for i in f_verbalizer.readline().split(',')][:n]
+                            neg = [i.strip() for i in f_verbalizer.readline().split(',')][:n]
 
-                    with open('label_words/'+args.verbalizer+args.personality+'_label_words.txt', 'r') as f_verbalizer:
-                            pos = [i.strip() for i in f_verbalizer.readline().split(',')][:100]
-                            neg = [i.strip() for i in f_verbalizer.readline().split(',')][:100]
-
-                    with open('label_words/'+args.verbalizer+args.personality+'_label_weights.txt', 'r') as f_verbalizer:
-                            pos_weights = eval(f_verbalizer.readline())[:100]
-                            neg_weights = eval(f_verbalizer.readline())[:100]
+                    with open('label_words/'+args.verbalizer+args.personality+'_weights.txt', 'r') as f_verbalizer:
+                            pos_weights = eval(f_verbalizer.readline())[:n]
+                            neg_weights = eval(f_verbalizer.readline())[:n]
 
 
                     diff_len = len(neg_weights) - len(pos_weights)
@@ -322,7 +313,16 @@ for data in datasets:
                         class_labels = [0,1]
                         
 
-                        myverbalizer = MyVerbalizer(
+#                         myverbalizer = MyVerbalizer(
+#                             classes = class_labels,
+#                             label_words = {
+#                                 0 : neg, 
+#                                 1 : pos
+#                             },
+#                             tokenizer=tokenizer,
+#                             label_words_weights=label_words_weights.cuda())
+                        
+                        myverbalizer = ManualVerbalizer(
                             classes = class_labels,
                             label_words = {
                                 0 : neg, 
